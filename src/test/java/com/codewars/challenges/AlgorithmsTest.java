@@ -56,6 +56,7 @@ public class AlgorithmsTest {
         a.add(";-)");
         a.add(";~(");
         a.add(":~D");
+        a.add(";-~D");
         assertEquals(4, algorithms.countSmileys(a));
     }
 }
