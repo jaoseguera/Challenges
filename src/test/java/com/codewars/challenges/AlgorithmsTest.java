@@ -98,4 +98,14 @@ public class AlgorithmsTest {
         assertEquals("23:59:59", algorithms.makeReadable(86399));
         assertEquals("99:59:59", algorithms.makeReadable(359999));
     }
+    @Test
+    public void thirtTests() {
+        System.out.println("Fixed Tests: thirt");
+        assertEquals(87, algorithms.thirt(1234567));
+        assertEquals(79, algorithms.thirt(8529));
+        assertEquals(31, algorithms.thirt(85299258));
+        assertEquals(57, algorithms.thirt(5634));
+        assertEquals(71, algorithms.thirt(1111111111));
+        assertEquals(30, algorithms.thirt(987654321));
+    }
 }
