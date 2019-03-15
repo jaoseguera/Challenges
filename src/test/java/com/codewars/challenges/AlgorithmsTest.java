@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class AlgorithmsTest {
     @Test
-    public void countSmileysTest2() {
+    public void countSmileysTest() {
         List<String> a = new ArrayList<String>();
         a.add(":)");
         a.add("XD");
@@ -22,7 +22,7 @@ public class AlgorithmsTest {
         assertEquals(1, Algorithms.countSmileys(a));
     }
     @Test
-    public void Test() {
+    public void tenMinWalkIsValidTest() {
         assertTrue(Algorithms.tenMinWalkIsValid(new char[] { 'n', 's', 'n', 's', 'n', 's', 'n', 's', 'n', 's' }));
         assertFalse(Algorithms.tenMinWalkIsValid(new char[] { 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e' }));
         assertFalse(Algorithms.tenMinWalkIsValid(new char[] { 'w' }));
@@ -43,7 +43,7 @@ public class AlgorithmsTest {
         assertEquals("99:59:59", Algorithms.makeReadable(359999));
     }
     @Test
-    public void thirtTests() {
+    public void thirtTest() {
         System.out.println("Fixed Tests: thirt");
         assertEquals(87, Algorithms.thirt(1234567));
         assertEquals(79, Algorithms.thirt(8529));
@@ -53,7 +53,7 @@ public class AlgorithmsTest {
         assertEquals(30, Algorithms.thirt(987654321));
     }
     @Test
-    public void test20() {
+    public void WhoIsNextTest() {
         String[] names = new String[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
         int n = 6;
         assertEquals("Sheldon", Algorithms.WhoIsNextOptimized(names, n));
