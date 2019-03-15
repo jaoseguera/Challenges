@@ -10,20 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class AlgorithmsTest {
-    Algorithms algorithms = new Algorithms();
-
     @Test
-    public void test1() {
-        List<String> a = new ArrayList<String>();
-        a.add(":)");
-        a.add(":D");
-        a.add(":-}");
-        a.add(":-()");
-        assertEquals(2, algorithms.countSmileys(a));
-    }
-
-    @Test
-    public void test2() {
+    public void countSmileysTest2() {
         List<String> a = new ArrayList<String>();
         a.add(":)");
         a.add("XD");
@@ -31,81 +19,48 @@ public class AlgorithmsTest {
         a.add("x:-");
         a.add("):-");
         a.add("D:");
-        assertEquals(1, algorithms.countSmileys(a));
+        assertEquals(1, Algorithms.countSmileys(a));
     }
-
-    @Test
-    public void test4() {
-        List<String> a = new ArrayList<String>();
-        a.add(":)");
-        a.add(":D");
-        a.add("X-}");
-        a.add("xo)");
-        a.add(":X");
-        a.add(":-3");
-        a.add(":3");
-        assertEquals(2, algorithms.countSmileys(a));
-    }
-
-    @Test
-    public void test5() {
-        List<String> a = new ArrayList<String>();
-        a.add(":)");
-        a.add(":)");
-        a.add("x-]");
-        a.add(":ox");
-        a.add(";-(");
-        a.add(";-)");
-        a.add(";~(");
-        a.add(":~D");
-        a.add(";-~D");
-        assertEquals(4, algorithms.countSmileys(a));
-    }
-
     @Test
     public void Test() {
-        assertTrue(algorithms.isValid(new char[] { 'n', 's', 'n', 's', 'n', 's', 'n', 's', 'n', 's' }));
-        assertFalse(algorithms.isValid(new char[] { 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e' }));
-        assertFalse(algorithms.isValid(new char[] { 'w' }));
-        assertFalse(algorithms.isValid(new char[] { 'n', 'n', 'n', 's', 'n', 's', 'n', 's', 'n', 's' }));
+        assertTrue(Algorithms.tenMinWalkIsValid(new char[] { 'n', 's', 'n', 's', 'n', 's', 'n', 's', 'n', 's' }));
+        assertFalse(Algorithms.tenMinWalkIsValid(new char[] { 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e', 'w', 'e' }));
+        assertFalse(Algorithms.tenMinWalkIsValid(new char[] { 'w' }));
+        assertFalse(Algorithms.tenMinWalkIsValid(new char[] { 'n', 'n', 'n', 's', 'n', 's', 'n', 's', 'n', 's' }));
     }
     @Test
-    public void test200() {
-        assertEquals(54321, algorithms.reverseInt(12345));
+    public void feastTest() {
+        assertTrue(Algorithms.feast("great blue heron", "garlic nann"));
+        assertTrue(Algorithms.feast("chickadee", "chocolate cake"));
+        assertFalse(Algorithms.feast("brown bear", "bear claw"));
     }
     @Test
-    public void fixedTest() {
-        assertTrue(algorithms.feast("great blue heron", "garlic nann"));
-        assertTrue(algorithms.feast("chickadee", "chocolate cake"));
-        assertFalse(algorithms.feast("brown bear", "bear claw"));
-    }
-    
-    @Test
-    public void testBasic() {
-        assertEquals(3,
-                algorithms.arithmetic(1, 2, "add"));
-        assertEquals(6, algorithms.arithmetic(8, 2, "subtract"));
-        assertEquals(10,
-                algorithms.arithmetic(5, 2, "multiply"));
-        assertEquals(4, algorithms.arithmetic(8, 2, "divide"));
-    }
-
-    @Test
-    public void Tests() {
-        assertEquals("00:00:05", algorithms.makeReadable(5));
-        assertEquals("00:01:00", algorithms.makeReadable(60));
-        assertEquals("00:00:00", algorithms.makeReadable(0));
-        assertEquals("23:59:59", algorithms.makeReadable(86399));
-        assertEquals("99:59:59", algorithms.makeReadable(359999));
+    public void makeReadableTest() {
+        assertEquals("00:00:05", Algorithms.makeReadable(5));
+        assertEquals("00:01:00", Algorithms.makeReadable(60));
+        assertEquals("00:00:00", Algorithms.makeReadable(0));
+        assertEquals("23:59:59", Algorithms.makeReadable(86399));
+        assertEquals("99:59:59", Algorithms.makeReadable(359999));
     }
     @Test
     public void thirtTests() {
         System.out.println("Fixed Tests: thirt");
-        assertEquals(87, algorithms.thirt(1234567));
-        assertEquals(79, algorithms.thirt(8529));
-        assertEquals(31, algorithms.thirt(85299258));
-        assertEquals(57, algorithms.thirt(5634));
-        assertEquals(71, algorithms.thirt(1111111111));
-        assertEquals(30, algorithms.thirt(987654321));
+        assertEquals(87, Algorithms.thirt(1234567));
+        assertEquals(79, Algorithms.thirt(8529));
+        assertEquals(31, Algorithms.thirt(85299258));
+        assertEquals(57, Algorithms.thirt(5634));
+        assertEquals(71, Algorithms.thirt(1111111111));
+        assertEquals(30, Algorithms.thirt(987654321));
     }
+    @Test
+    public void test20() {
+        String[] names = new String[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+        int n = 6;
+        assertEquals("Sheldon", Algorithms.WhoIsNextOptimized(names, n));
+    }
+    // @Test
+    // public void sockMechantTest() {
+    // int [] array = {10, 20, 20, 10, 10, 30, 50, 10, 20};
+    // assertEquals(87, Algorithms.sockMechant(9, array));
+    // }
 }

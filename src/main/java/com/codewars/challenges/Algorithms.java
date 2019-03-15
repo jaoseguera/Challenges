@@ -1,23 +1,33 @@
 package com.codewars.challenges;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Algorithms {
-    public int countSmileys(List<String> arr) {
-        // int counter = 0;
+
+    // COUNT THE SMILEY FACES!: https://www.codewars.com/kata/583203e6eb35d7980400002a
+    public static int countSmileys(List<String> arr) {
+        int counter = 0;
         String pattern = "[:;][-~]?[)D]";
 
-        // for(int i=0; i<arr.size();i++){
-        // if(arr.get(i).matches(pattern))
-        // counter++;
-        // }
-        // return counter;
-        System.out.println(arr.stream());
-
-        return (int) arr.stream().filter(x -> x.matches(pattern)).count();
+        for(int i=0; i<arr.size();i++){
+            if(arr.get(i).matches(pattern))
+                counter++;
+        }
+        return counter;
     }
 
-    public boolean isValid(char[] walk) {
+    public static int countSmileysOptimized(List<String> arr) {
+        return (int) arr.stream()
+            .filter(e -> e.matches("[:;][-~]?[\\)D]"))
+            .count();
+    }
+
+    // TAKE A TEN MINUTE WALK: https://www.codewars.com/kata/54da539698b8a2ad76000228
+    public static boolean tenMinWalkIsValid(char[] walk) {
         int north = 0, south = 0, east = 0, west = 0;
         if (walk.length == 10) {
             for (int i = 0; i < walk.length; i++) {
@@ -42,16 +52,15 @@ public class Algorithms {
         return false;
     }
 
-    public int reverseInt(int n) {
-        int reversed = 0;
-        while (n != 0) {
-            reversed = reversed * 10 + (n % 10);
-            n /= 10;
-        }
-        return reversed;
+    public static boolean tenMinWalkIsValidOptimized(char[] walk) {
+        String s = new String(walk);
+        return s.chars().filter(p -> p == 'n').count() == s.chars().filter(p -> p == 's').count()
+                && s.chars().filter(p -> p == 'e').count() == s.chars().filter(p -> p == 'w').count()
+                && s.chars().count() == 10;
     }
 
-    public boolean feast(String beast, String dish) {
+    // THE FEAST OF MANY BEASTS: https://www.codewars.com/kata/5aa736a455f906981800360d
+    public static boolean feast(String beast, String dish) {
         char lastChar = beast.charAt(beast.length() - 1);
         char firstChar = beast.charAt(0);
 
@@ -61,7 +70,13 @@ public class Algorithms {
 
     }
 
-    public String declareWinner(Fighter fighter1, Fighter fighter2, String firstAttacker) {
+    public static boolean feastAlternative(String b, String d) {
+        return d.startsWith(b.substring(0, 0)) && d.endsWith(b.substring(b.length() - 1));
+    }
+
+    // TWO FIGHTERS, ONE WINNER:
+    // https://www.codewars.com/kata/577bd8d4ae2807c64b00045b
+    public static String declareWinner(Fighter fighter1, Fighter fighter2, String firstAttacker) {
         Fighter attacker = (fighter1.name.equals(firstAttacker)) ? fighter1 : fighter2;
         Fighter defender = (attacker.equals(fighter2)) ? fighter1 : fighter2;
         Fighter temp = null;
@@ -77,24 +92,15 @@ public class Algorithms {
         return temp.name;
     }
 
-    public int arithmetic(int a, int b, String operator) {
-        switch (operator) {
-        case "add":
-            System.out.println(a + b);
-            return a + b;
-        case "subtract":
-            System.out.println(a - b);
-            return a - b;
-        case "multiply":
-            System.out.println(a * b);
-            return a * b;
-        default:
-            System.out.println(a / b);
-            return a / b;
-        }
-    }
+    public static String declareWinnerAlternative(Fighter fighter1, Fighter fighter2, String firstAttacker) {
+        double attacksToKill1 = Math.ceil((double) fighter2.health / fighter1.damagePerAttack)
+                + (fighter1.name.equals(firstAttacker) ? 0 : 1);
+        double attacksToKill2 = Math.ceil((double) fighter1.health / fighter2.damagePerAttack);
 
-    public String makeReadable(int time) {
+        return attacksToKill1 <= attacksToKill2 ? fighter1.name : fighter2.name;
+    }
+    // HUMAN READABLE TIME: https://www.codewars.com/kata/52685f7382004e774f0001f7
+    public static String makeReadable(int time) {
         if (time == 0)
             return "00:00:00";
 
@@ -127,9 +133,15 @@ public class Algorithms {
         return String.format("%s:%s:%s", hours, minutes, seconds);
     }
 
-    int[] array = { 1, 10, 9, 12, 3, 4 };
+    public static String makeReadableOptimized(int seconds) {
+        return String.format("%02d:%02d:%02d", seconds / 3600, (seconds / 60) % 60, seconds % 60);
+    }
 
-    public long thirt(long n) {
+    // A RULE OF DIVISIBILITY BY 13:
+    // https://www.codewars.com/kata/564057bc348c7200bd0000ff
+    static int[] remainders = { 1, 10, 9, 12, 3, 4 };
+
+    public static long thirt(long n) {
         int index = 0;
         long result = 0;
         long remainder = n;
@@ -137,7 +149,7 @@ public class Algorithms {
         while (remainder > 0) {
             long digit = remainder % 10;
             remainder /= 10;
-            result += digit * array[index];
+            result += digit * remainders[index];
 
             if (index == 5)
                 index = 0;
@@ -150,4 +162,42 @@ public class Algorithms {
         else
             return thirt(result);
     }
+    
+    // DOUBLE COLA: https://www.codewars.com/kata/551dd1f424b7a4cdae0001f0
+    public static String WhoIsNext(String[] names, int n) {
+        List<String> list = new LinkedList<String>(Arrays.asList(names));
+        String current = "";
+
+        for (int i = 1; i <= n; i++) {
+            current = list.get(0);
+            list.remove(0);
+            list.add(current);
+            list.add(current);
+        }
+
+        return current;
+    }
+
+    public static String WhoIsNextOptimized(String[] names, int n) {
+        while (n > 5) {
+            n = (n - 4) / 2;
+        }
+
+        return names[n - 1];
+    }
+
+    // public static int sockMechant(int n, int[] array) {
+    // Set<Integer> colors = new HashSet<>();
+    // int pairs = 0;
+
+    // for (int i = 0; i < n; i++) {
+    // if (!colors.contains(array[i])) {
+    // colors.add(array[i]);
+    // } else {
+    // pairs++;
+    // colors.remove(array[i]);
+    // }
+    // }
+    // return pairs;
+    // }
 }
